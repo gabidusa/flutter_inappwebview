@@ -679,7 +679,14 @@ let interceptNavigationStateChangeJS = """
 })(window, window.document, window.history);
 """
 
-public class InAppWebView: WKWebView, UIScrollViewDelegate, WKUIDelegate, WKNavigationDelegate, WKScriptMessageHandler {
+
+public class NoActionsWKWebView: WKWebView {
+    public override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
+        return false
+    }
+}
+
+public class InAppWebView: NoActionsWKWebView, UIScrollViewDelegate, WKUIDelegate, WKNavigationDelegate, WKScriptMessageHandler {
 
     var IABController: InAppBrowserWebViewController?
     var IAWController: FlutterWebViewController?
